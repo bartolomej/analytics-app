@@ -48,7 +48,7 @@ public class Definition {
     }
 
     private static String createAdminTable() {
-        return ("CREATE TABLE user (" +
+        return ("CREATE TABLE admin (" +
                 "uid varchar(100) primary key," +
                 "username varchar(30)," +
                 "password varchar(100)," +
@@ -69,9 +69,9 @@ public class Definition {
     private static String createGraphTable() {
         return ("CREATE TABLE node (" +
                 "uid varchar(100) primary key," +
-                "name varchar(50)" +
+                "name varchar(50)," +
                 "from_node varchar(100)," +
-                "to_node varchar(100)" +
+                "to_node varchar(100)," +
                 "created date" +
                 ");"
         );

@@ -1,10 +1,16 @@
 package db;
 
+import com.mysql.cj.jdbc.result.ResultSetImpl;
+import com.mysql.cj.result.Field;
+import config.DbConstants;
 import db.sql.Definition;
 import db.sql.Schema;
+import scripts.Run;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Repository {
@@ -14,38 +20,49 @@ public class Repository {
     public static void init() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/lendit?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-                "root", "rootPass"
+                "jdbc:" + DbConstants.host + "/" + DbConstants.database + "?" +
+                        "useUnicode=true&useJDBCCompliantTimezoneShift=true" +
+                        "&useLegacyDatetimeCode=false&serverTimezone=UTC",
+                DbConstants.user, DbConstants.password
         );
-        initDb();
     }
 
+    // done with shell script
     private static void initDb() throws SQLException {
         Map<Schema, String> definitionStatements = Definition.getAll();
         ArrayList<Schema> initSchemas = getInitTables();
         for (Map.Entry<Schema, String> schema : definitionStatements.entrySet()) {
-            if (initSchemas.contains(Schema.valueOf(schema.getValue()))) {
-                executeQuery(schema.getValue());
+            if (initSchemas.contains(schema.getKey())) {
+                executeUpdate(schema.getValue());
             }
         }
     }
 
     private static ArrayList<Schema> getInitTables() throws SQLException {
         DatabaseMetaData meta = connection.getMetaData();
-        ResultSet res = meta.getTables("analytics", null, null, new String[] {"TABLE"});
+        ResultSet results = meta.getTables("analytics", null, null, new String[] {"TABLE"});
         ArrayList<Schema> tables = new ArrayList<>();
-        while (res.next()) {
-            String table = res.getString("TABLE_NAME").toUpperCase();
+        while (results.next()) {
+            String table = results.getString("TABLE_NAME").toUpperCase();
             tables.add(Schema.valueOf(table));
         }
         return tables;
     }
 
-    public static ResultSet executeQuery(String query) throws SQLException {
+    public static ArrayList<Map> executeQuery(String query) throws SQLException {
         Statement stmt = connection.createStatement();
         ResultSet resultSet = stmt.executeQuery(query);
-        connection.close();
-        return resultSet;
+        ArrayList<Map> results = new ArrayList<>();
+        while (resultSet.next()) {
+            Map<String, String> columns = new HashMap<>();
+            Field[] fields = ((ResultSetImpl)resultSet).getColumnDefinition().getFields();
+            for (Field field : fields) {
+                String label = field.getColumnLabel();
+                columns.put(label, resultSet.getString(label));
+            }
+            results.add(columns);
+        }
+        return results;
     }
 
     public static void executeUpdate(String query) throws SQLException {

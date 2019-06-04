@@ -1,0 +1,1 @@
+cat ../mysql/tables.sql | mysql --password=rootPass --user=root --host=localhost
