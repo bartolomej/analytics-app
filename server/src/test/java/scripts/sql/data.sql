@@ -15,11 +15,11 @@ VALUES ('3', 'testUser3', 'testPass3', '2019-01-03', 'test.user3@mail.com', 'dev
 
 -- APP INSERTS --
 
-INSERT INTO app (name, url)
-VALUES ('testApp1', 'testUrl1.com');
+INSERT INTO app (name, url, description, created)
+VALUES ('testApp1', 'testUrl1.com', 'Just a test app 1', '2019-01-04');
 
-INSERT INTO app (name, url)
-VALUES ('testApp2', 'testUrl2.com');
+INSERT INTO app (name, url, description, created)
+VALUES ('testApp2', 'testUrl2.com', 'Just a test app 2', '2019-01-05');
 
 
 -- OWNERSHIP INSERTS --
@@ -33,11 +33,11 @@ VALUES ('2', '2', 'testApp2', '2019-01-01');
 
 -- NODE INSERTS --
 
-INSERT INTO node (uid, url, created)
-VALUES ('1', 'node1.com', "2018-01-01");
+INSERT INTO node (uid, url, created, app)
+VALUES ('1', 'node1.com', '2018-01-01', 'testApp1');
 
-INSERT INTO node (uid, url, created)
-VALUES ('2', 'node2.com', "2018-01-02");
+INSERT INTO node (uid, url, created, app)
+VALUES ('2', 'node2.com', '2018-01-02', 'testApp1');
 
 
 -- GRAPH INSERTS --

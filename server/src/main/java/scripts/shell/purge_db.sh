@@ -1,1 +1,1 @@
-cat ../mysql/purge.sql | mysql --password=rootPass --user=root --host=localhost
+cat ../sql/purge.sql | mysql --password=rootPass --user=root --host=localhost

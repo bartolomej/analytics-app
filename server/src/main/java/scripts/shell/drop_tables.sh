@@ -1,1 +1,1 @@
-cat ../mysql/drop.sql | mysql --password=rootPass --user=root --host=localhost
+cat ../sql/drop.sql | mysql --password=rootPass --user=root --host=localhost

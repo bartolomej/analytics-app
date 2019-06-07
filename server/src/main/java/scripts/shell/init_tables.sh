@@ -1,1 +1,1 @@
-cat ../mysql/tables.sql | mysql --password=rootPass --user=root --host=localhost
+cat ../sql/tables.sql | mysql --password=rootPass --user=root --host=localhost

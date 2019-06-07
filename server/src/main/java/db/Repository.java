@@ -68,7 +68,11 @@ public class Repository {
     public static void executeUpdate(String query) throws SQLException {
         Statement stmt = connection.createStatement();
         int resultSet = stmt.executeUpdate(query);
-        connection.close();
+    }
+
+    public static void executeManipulation(String query) throws SQLException {
+        Statement stmt = connection.createStatement();
+        boolean resultSet = stmt.execute(query);
     }
 
 }
