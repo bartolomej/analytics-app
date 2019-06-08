@@ -4,10 +4,9 @@ import com.mysql.cj.jdbc.result.ResultSetImpl;
 import com.mysql.cj.result.Field;
 import config.DbConstants;
 import db.sql.Definition;
+import db.sql.Delete;
 import db.sql.Schema;
-import scripts.Run;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,6 +72,16 @@ public class Repository {
     public static void executeManipulation(String query) throws SQLException {
         Statement stmt = connection.createStatement();
         boolean resultSet = stmt.execute(query);
+    }
+
+    public static void purgeDatabase() throws SQLException {
+        executeManipulation(Delete.allAppOwnership());
+        executeManipulation(Delete.allUsers());
+        executeManipulation(Delete.allLogs());
+        executeManipulation(Delete.allAdmins());
+        executeManipulation(Delete.allApps());
+        executeManipulation(Delete.allGraphRelations());
+        executeManipulation(Delete.allNodes());
     }
 
 }

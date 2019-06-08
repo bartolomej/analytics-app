@@ -1,7 +1,6 @@
 package db;
 
 import org.junit.Test;
-import scripts.Run;
 
 import java.io.IOException;
 import java.sql.SQLException;

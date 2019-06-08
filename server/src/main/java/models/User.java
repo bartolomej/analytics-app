@@ -31,7 +31,7 @@ public class User {
                 this.username.equals(user.username) &&
                 this.password.equals(user.password) &&
                 this.role.equals(user.role) &&
-                this.created.equals(user.created)
+                this.created.toString().equals(user.created.toString())
         );
     }
 }

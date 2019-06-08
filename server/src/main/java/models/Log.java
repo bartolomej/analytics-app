@@ -11,6 +11,7 @@ public class Log {
     public Date datetime;
 
     public Log(String node, String type, String message, String extra, Date datetime) {
+        this.node = node;
         this.type = type;
         this.message = message;
         this.extra = extra;

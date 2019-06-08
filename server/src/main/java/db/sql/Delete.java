@@ -46,27 +46,27 @@ public class Delete {
     }
 
     public static String allApps() {
-        return "DELETE FROM user";
+        return "DELETE FROM app";
     }
 
     public static String allAppOwnership() {
-        return "DELETE FROM user";
+        return "DELETE FROM ownership";
     }
 
     public static String allLogs() {
-        return "DELETE FROM user";
+        return "DELETE FROM log";
     }
 
     public static String allAdmins() {
-        return "DELETE FROM user";
+        return "DELETE FROM admin";
     }
 
     public static String allNodes() {
-        return "DELETE FROM user";
+        return "DELETE FROM node";
     }
 
     public static String allGraphRelations() {
-        return "DELETE FROM user";
+        return "DELETE FROM graph";
     }
 
     public static String allUsers() {

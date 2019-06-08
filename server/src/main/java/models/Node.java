@@ -9,9 +9,9 @@ public class Node {
     public String url;
     public String app;
     public Date created;
-    public ArrayList<Node> edges;
+    public ArrayList<String> edges;
 
-    public Node(String uid, String url, String app, Date created, ArrayList<Node> edges) {
+    public Node(String uid, String url, String app, Date created, ArrayList<String> edges) {
         this.uid = uid;
         this.url = url;
         this.created = created;
@@ -27,14 +27,22 @@ public class Node {
         );
     }
 
-    public boolean hasEdges(ArrayList<Node> edges) {
-        for (Node node : edges) {
+    public void addEdges(ArrayList<String> edges) {
+        this.edges.addAll(edges);
+    }
+
+    public boolean hasEdges(ArrayList<String> edges) {
+        for (String node : edges) {
             if (!this.edges.contains(node)) return false;
         }
         return true;
     }
 
-    public ArrayList<Node> getNeighbors() {
+    public boolean hasEdge(String edge)  {
+        return this.edges.contains(edge);
+    }
+
+    public ArrayList<String> getEdges() {
         return this.edges;
     }
 

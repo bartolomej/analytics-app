@@ -1,6 +1,7 @@
 package db.sql;
 
 import models.*;
+import utils.ParseUtil;
 
 import java.util.Date;
 
@@ -11,7 +12,7 @@ public class Insert {
                 "INSERT INTO user (uid, username, password, created, email, role)" +
                 "VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",
                 user.uid, user.username, user.password,
-                "2019-05-05", user.email, user.role // TODO: serialize date
+                ParseUtil.toSqlDate(user.created), user.email, user.role
         );
     }
 
@@ -19,7 +20,7 @@ public class Insert {
         return String.format(
                 "INSERT INTO app (name, url, description, created) " +
                 "VALUES ('%s', '%s', '%s', '%s')",
-                app.name, app.url, app.description, app.created
+                app.name, app.url, app.description, ParseUtil.toSqlDate(app.created)
         );
     }
 
@@ -27,7 +28,7 @@ public class Insert {
         return String.format(
                 "INSERT INTO ownership (user, app, added) " +
                 "VALUES ('%s', '%s', '%s')",
-                userUid, appName, new Date()
+                userUid, appName, ParseUtil.toSqlDate(new Date())
         );
     }
 
@@ -35,7 +36,7 @@ public class Insert {
         return String.format(
                 "INSERT INTO log (type, datetime, message, extra, node) " +
                 "VALUES ('%s', '%s', '%s', '%s', '%s')",
-                log.type, log.datetime, log.message, log.extra, log.node
+                log.type, ParseUtil.toSqlDate(log.datetime), log.message, log.extra, log.node
         );
     }
 
@@ -43,7 +44,7 @@ public class Insert {
         return String.format(
                 "INSERT INTO log (uid, username, password, created) " +
                 "VALUES ('%s', '%s', '%s', '%s')",
-                admin.uid, admin.username, admin.password, admin.created
+                admin.uid, admin.username, admin.password, ParseUtil.toSqlDate(admin.created)
         );
     }
 
@@ -51,7 +52,7 @@ public class Insert {
         return String.format(
                 "INSERT INTO node (uid, url, created, app) " +
                 "VALUES ('%s', '%s', '%s', '%s')",
-                node.uid, node.url, node.created, node.app
+                node.uid, node.url, ParseUtil.toSqlDate(node.created), node.app
         );
     }
 
@@ -59,7 +60,7 @@ public class Insert {
         return String.format(
                 "INSERT INTO graph (from_node, to_node, created) " +
                 "VALUES ('%s', '%s', '%s')",
-                fromNode, toNode, new Date()
+                fromNode, toNode, ParseUtil.toSqlDate(new Date())
         );
     }
 

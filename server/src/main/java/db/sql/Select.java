@@ -1,5 +1,7 @@
 package db.sql;
 
+import utils.ParseUtil;
+
 import java.util.Date;
 
 public class Select {
@@ -24,10 +26,44 @@ public class Select {
                 "WHERE o.user = '%s'", userUid);
     }
 
+    public static String allApps() {
+        return "SELECT * FROM app";
+    }
+
     public static String appNodes(String appName) {
         return String.format(
                 "SELECT * FROM node " +
                 "WHERE node.app = '%s'", appName);
+    }
+
+    public static String allNodes() {
+        return "SELECT * FROM node";
+    }
+
+    public static String nodeEdges(String nodeUid) {
+        return String.format(
+                "SELECT * FROM graph " +
+                "WHERE graph.from = '%s'",
+                nodeUid
+        );
+    }
+
+    public static String logsByUser(String userUid) {
+        return String.format(
+                "SELECT * FROM log " +
+                "INNER JOIN node " +
+                "ON node.uid = log.node " +
+                "INNER JOIN app " +
+                "ON app.name = node.app " +
+                "INNER JOIN ownership " +
+                "ON ownership.app = app.name " +
+                "WHERE ownership.user = '%s'",
+                userUid
+        );
+    }
+
+    public static String allLogs() {
+        return "SELECT * FROM log";
     }
 
     public static String appLogs(String appName) {
@@ -40,26 +76,26 @@ public class Select {
 
     public static String appLogs(String appName, Date from) {
         return String.format(
-                "SELECT * FROM log l" +
+                "SELECT * FROM log l " +
                 "INNER JOIN node n " +
                 "ON n.uid = l.node " +
                 "WHERE n.app = '%s' " +
                 "AND l.datetime > '%s'",
-                appName, from.toString()); // TODO: parse date
+                appName, ParseUtil.toSqlDate(from));
     }
 
-    public static String queryNodeLogs(String uid) {
+    public static String nodeLogs(String uid) {
         return String.format(
                 "SELECT * FROM log l" +
                 "WHERE l.node = '%s'", uid);
     }
 
-    public static String queryNodeLogsFromDate(String uid, Date date) {
+    public static String nodeLogsFromDate(String uid, Date date) {
         return String.format(
                 "SELECT * FROM log l" +
                 "WHERE l.node = '%s'" +
                 "AND l.datetime > '%s'",
-                uid, date.toString()); // TODO: parse date
+                uid, ParseUtil.toSqlDate(date));
     }
 
     public static String allUsers() {
