@@ -26,6 +26,12 @@ public class Select {
                 "WHERE o.user = '%s'", userUid);
     }
 
+    public static String app(String appName) {
+        return String.format(
+                "SELECT * FROM app " +
+                "WHERE name = '%s'", appName);
+    }
+
     public static String allApps() {
         return "SELECT * FROM app";
     }
@@ -33,7 +39,7 @@ public class Select {
     public static String appNodes(String appName) {
         return String.format(
                 "SELECT * FROM node " +
-                "WHERE node.app = '%s'", appName);
+                "WHERE app = '%s'", appName);
     }
 
     public static String allNodes() {
@@ -43,7 +49,7 @@ public class Select {
     public static String nodeEdges(String nodeUid) {
         return String.format(
                 "SELECT * FROM graph " +
-                "WHERE graph.from = '%s'",
+                "WHERE from_node = '%s'",
                 nodeUid
         );
     }
@@ -68,7 +74,7 @@ public class Select {
 
     public static String appLogs(String appName) {
         return String.format(
-                "SELECT * FROM log l" +
+                "SELECT * FROM log l " +
                 "INNER JOIN node n " +
                 "ON n.uid = l.node " +
                 "WHERE n.app = '%s'", appName);
@@ -86,20 +92,47 @@ public class Select {
 
     public static String nodeLogs(String uid) {
         return String.format(
-                "SELECT * FROM log l" +
+                "SELECT * FROM log l " +
                 "WHERE l.node = '%s'", uid);
     }
 
     public static String nodeLogsFromDate(String uid, Date date) {
         return String.format(
-                "SELECT * FROM log l" +
+                "SELECT * FROM log l " +
                 "WHERE l.node = '%s'" +
                 "AND l.datetime > '%s'",
                 uid, ParseUtil.toSqlDate(date));
     }
 
+    public static String internalLogs() {
+        return "SELECT * FROM log " +
+        "WHERE node is null";
+    }
+
+    public static String internalLogsFromDate(Date date) {
+        return String.format(
+                "SELECT * FROM log l " +
+                "WHERE l.node is null " +
+                "AND l.datetime > '%s'",
+                ParseUtil.toSqlDate(date)
+        );
+    }
+
+    public static String internalLogsWithType(String type) {
+        return String.format(
+                "SELECT * FROM log l " +
+                "WHERE l.node is null " +
+                "AND l.type = '%s'",
+                type
+        );
+    }
+
     public static String allUsers() {
         return "SELECT * FROM user";
+    }
+
+    public static String allAdmins() {
+        return "SELECT * FROM admin";
     }
 
 }

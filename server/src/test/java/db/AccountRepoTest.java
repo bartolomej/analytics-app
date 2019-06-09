@@ -10,7 +10,7 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
-public class UserRepoTest {
+public class AccountRepoTest {
 
     @Before
     public void doBefore() throws SQLException, ClassNotFoundException {
@@ -19,7 +19,7 @@ public class UserRepoTest {
     }
 
     @Test
-    public void addUser() throws SQLException, ClassNotFoundException, ParseException {
+    public void addUser() throws Exception {
         User expected = new User("1",
                 "testUsername",
                 "testPass",
@@ -28,10 +28,19 @@ public class UserRepoTest {
                 null
         );
 
-        UserRepo.add(expected);
+        AccountRepo.add(expected);
 
-        User actual = UserRepo.getByUid("1");
+        User actual = AccountRepo.getUserByUid("1");
         assertTrue(expected.equals(actual));
+    }
+
+    @Test
+    public void getNonExistingUser() throws Exception {
+        try {
+            User actual = AccountRepo.getUserByUid("1");
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "User 1 not found");
+        }
     }
 
     @Test
@@ -43,7 +52,6 @@ public class UserRepoTest {
                 "user", new Date(),
                 null
         );
-
         User updated = new User("1",
                 "updatedUsername",
                 "updatedPassword",
@@ -52,11 +60,10 @@ public class UserRepoTest {
                 null
         );
 
-        UserRepo.add(expected);
+        AccountRepo.add(expected);
+        AccountRepo.update(updated);
 
-        UserRepo.update(updated);
-
-        User user = UserRepo.getByUid("1");
+        User user = AccountRepo.getUserByUid("1");
 
         assertTrue(user.equals(updated));
     }

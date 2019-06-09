@@ -1,30 +1,36 @@
 import api.AdminEndpoints;
+import api.ClientEndpoints;
 import api.WebEndpoints;
 import db.Repository;
 import io.javalin.Javalin;
+import models.Response;
 
-import java.nio.file.Path;
 import java.sql.SQLException;
-
-import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class Application {
 
     static WebEndpoints webEndpoints;
     static AdminEndpoints adminEndpoints;
+    static ClientEndpoints clientEndpoints;
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
         Repository.init();
 
         Javalin app = Javalin.create()
+                .enableCaseSensitiveUrls()
                 .start(7000);
+
+        app.exception(Exception.class, (e, ctx) -> {
+            ctx.json(Response.notFound(e.getMessage()));
+        });
 
         webEndpoints = new WebEndpoints(app);
         adminEndpoints = new AdminEndpoints(app);
+        clientEndpoints = new ClientEndpoints(app);
 
         app.error(404, ctx -> {
-            ctx.status(404);
+            ctx.json(Response.notFound("Path not found"));
         });
     }
 

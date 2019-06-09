@@ -27,7 +27,7 @@ public class Repository {
     }
 
     // done with shell script
-    private static void initDb() throws SQLException {
+    private static void initDb() throws Exception {
         Map<Schema, String> definitionStatements = Definition.getAll();
         ArrayList<Schema> initSchemas = getInitTables();
         for (Map.Entry<Schema, String> schema : definitionStatements.entrySet()) {
@@ -37,7 +37,8 @@ public class Repository {
         }
     }
 
-    private static ArrayList<Schema> getInitTables() throws SQLException {
+    private static ArrayList<Schema> getInitTables() throws Exception {
+        if (connection == null) throw new Exception("Db not initialized");
         DatabaseMetaData meta = connection.getMetaData();
         ResultSet results = meta.getTables("analytics", null, null, new String[] {"TABLE"});
         ArrayList<Schema> tables = new ArrayList<>();
@@ -79,9 +80,9 @@ public class Repository {
         executeManipulation(Delete.allUsers());
         executeManipulation(Delete.allLogs());
         executeManipulation(Delete.allAdmins());
-        executeManipulation(Delete.allApps());
         executeManipulation(Delete.allGraphRelations());
         executeManipulation(Delete.allNodes());
+        executeManipulation(Delete.allApps());
     }
 
 }

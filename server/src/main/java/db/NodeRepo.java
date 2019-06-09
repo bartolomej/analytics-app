@@ -41,7 +41,6 @@ public class NodeRepo {
     }
 
     private static ArrayList<Node> deserializeResults(ArrayList<Map> results) {
-        if (results.size() == 0) return null;
         ArrayList<Node> nodes = new ArrayList<>();
         for (Map entry : results) {
             nodes.add(deserializeNode(entry));
@@ -61,10 +60,9 @@ public class NodeRepo {
     }
 
     private static ArrayList<String> deserializeEdges(ArrayList<Map> results) {
-        if (results.size() == 0) return null;
         ArrayList<String> edges = new ArrayList<>();
         for (Map entry : results) {
-            edges.add((String)entry.get("to"));
+            edges.add((String)entry.get("to_node")); // TODO: add Edge class ?
         }
         return edges;
     }

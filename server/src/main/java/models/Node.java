@@ -15,7 +15,7 @@ public class Node {
         this.uid = uid;
         this.url = url;
         this.created = created;
-        this.edges = edges;
+        this.edges = new ArrayList<>();
     }
 
     public boolean equals(Node node) {

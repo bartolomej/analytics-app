@@ -16,6 +16,15 @@ CREATE TABLE app (
     created datetime
 );
 
+CREATE TABLE node (
+    uid varchar(100) primary key,
+    url varchar(200),
+    created datetime,
+    app varchar(30),
+    FOREIGN KEY(app) REFERENCES app(name)
+);
+
+
 CREATE TABLE ownership (
     id int auto_increment primary key,
     user varchar(100) not null,
@@ -31,7 +40,8 @@ CREATE TABLE log (
     datetime datetime,
     message varchar(100),
     extra varchar(1000),
-    node varchar(100)
+    node varchar(100),
+    FOREIGN KEY(node) REFERENCES node(uid)
 );
 
 CREATE TABLE admin (
@@ -39,14 +49,6 @@ CREATE TABLE admin (
     username varchar(30),
     password varchar(100),
     created datetime
-);
-
-CREATE TABLE node (
-    uid varchar(100) primary key,
-    url varchar(200),
-    created datetime,
-    app varchar(30),
-    FOREIGN KEY(app) REFERENCES app(name)
 );
 
 CREATE TABLE graph (

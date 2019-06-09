@@ -1,15 +1,6 @@
 package api;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTCreator;
-import com.auth0.jwt.*;
-import com.auth0.jwt.algorithms.Algorithm;
-import db.UserRepo;
 import io.javalin.Javalin;
-import models.User;
-
-import java.util.ArrayList;
-import java.util.Date;
 
 public class AuthEndpoints {
 
