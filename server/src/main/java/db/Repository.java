@@ -26,7 +26,6 @@ public class Repository {
         );
     }
 
-    // done with shell script
     private static void initDb() throws Exception {
         Map<Schema, String> definitionStatements = Definition.getAll();
         ArrayList<Schema> initSchemas = getInitTables();

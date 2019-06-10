@@ -70,6 +70,20 @@ public class AdminEndpoints {
             ctx.json(Response.general(nodes));
         });
 
-        // TODO: add POST, PUT endpoints
+        app.post("/api/admin/:adminUid/user/:userUid", ctx -> {
+            User user = ctx.bodyAsClass(User.class);
+            AccountRepo.add(user);
+        });
+
+        app.put("/api/admin/:adminUid/user/:userUid", ctx -> {
+            User user = ctx.bodyAsClass(User.class);
+            AccountRepo.update(user);
+        });
+
+        app.put("/api/admin/:adminUid/app/:appUid", ctx -> {
+            App user = ctx.bodyAsClass(App.class);
+            AppRepo.update(user);
+        });
+
     }
 }

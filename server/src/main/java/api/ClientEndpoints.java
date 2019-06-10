@@ -6,8 +6,6 @@ import models.Log;
 import models.Response;
 import models.User;
 
-import java.util.Date;
-
 public class ClientEndpoints {
 
     Javalin app;

@@ -24,6 +24,8 @@ public class User {
         this.apps = apps;
     }
 
+    public User() {}
+
     public boolean equals(User user) {
         return (
                 this.uid.equals(user.uid) &&

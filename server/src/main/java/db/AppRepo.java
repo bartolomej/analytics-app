@@ -1,6 +1,8 @@
 package db;
 
+import db.sql.Insert;
 import db.sql.Select;
+import db.sql.Update;
 import models.App;
 import utils.ParseUtil;
 
@@ -9,9 +11,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
+import static db.Repository.executeManipulation;
 import static db.Repository.executeQuery;
 
 public class AppRepo {
+
+    public static void add(App app) throws SQLException {
+        executeManipulation(Insert.app(app));
+    }
+
+    public static void update(App app) throws SQLException {
+        executeManipulation(Update.app(app));
+    }
 
     public static ArrayList<App> getByUser(String userUid) throws Exception {
         return deserializeResults(executeQuery(Select.apps(userUid)));

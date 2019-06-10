@@ -18,8 +18,7 @@ public class Log {
         this.datetime = datetime;
     }
 
-    public Log() {
-    }
+    public Log() {}
 
     public boolean valid() {
         return (this.node != null && this.node.length() > 30);
