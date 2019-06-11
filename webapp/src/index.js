@@ -2,15 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
 import * as serviceWorker from './serviceWorker';
-import * as AdminApi from "./api/AdminApi";
 import './styles/App.css';
 import 'typeface-roboto';
-import Dashboard from './screens/admin/Dashboard';
-import Apps from './screens/admin/Apps';
-import Logs from './screens/admin/Logs'
-import Users from './screens/admin/Users';
-import UserScreen from './screens/UserScreen';
-import Router from './screens/admin/Router';
+import AdminApp from './screens/admin/App';
 
 /* TODO:
  * -> https://www.npmjs.com/package/material-table
@@ -18,7 +12,7 @@ import Router from './screens/admin/Router';
 
 const App = () => {
   return (
-    <Dashboard/>
+    <AdminApp/>
   )
 };
 
