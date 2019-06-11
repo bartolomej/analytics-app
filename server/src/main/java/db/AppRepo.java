@@ -16,12 +16,14 @@ import static db.Repository.executeQuery;
 
 public class AppRepo {
 
-    public static void add(App app) throws SQLException {
+    public static App add(App app) throws SQLException {
         executeManipulation(Insert.app(app));
+        return app;
     }
 
-    public static void update(App app) throws SQLException {
+    public static App update(App app) throws SQLException {
         executeManipulation(Update.app(app));
+        return app;
     }
 
     public static ArrayList<App> getByUser(String userUid) throws Exception {

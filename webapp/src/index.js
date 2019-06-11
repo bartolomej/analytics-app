@@ -1,13 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './styles/index.css';
 import * as serviceWorker from './serviceWorker';
 import * as AdminApi from "./api/AdminApi";
+import './styles/App.css';
+import 'typeface-roboto';
+import Dashboard from './screens/admin/Dashboard';
+import Apps from './screens/admin/Apps';
+import Logs from './screens/admin/Logs'
+import Users from './screens/admin/Users';
+import UserScreen from './screens/UserScreen';
+import Router from './screens/admin/Router';
 
-(async function () {
-  console.log(await AdminApi.getAdmin("ed715a73-4f35-4be2-b9ed-3b922850cbf6"));
-})();
+/* TODO:
+ * -> https://www.npmjs.com/package/material-table
+ */
+
+const App = () => {
+  return (
+    <Dashboard/>
+  )
+};
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

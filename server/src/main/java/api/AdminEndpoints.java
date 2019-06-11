@@ -8,6 +8,7 @@ import io.javalin.Javalin;
 import models.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class AdminEndpoints {
 
@@ -26,17 +27,22 @@ public class AdminEndpoints {
 
         app.get("/api/admin/:uid", ctx -> {
             Admin admin = AccountRepo.getAdminByUid(ctx.pathParam("uid"));
+            ctx.cookie("Access-Control-Allow-Origin", "*");
             ctx.json(Response.general(admin));
         });
 
         app.get("/api/admin/:uid/admins", ctx -> {
-            // is super admin ?
             ArrayList<Admin> admins = AccountRepo.getAllAdmins();
             ctx.json(Response.general(admins));
         });
 
         app.get("/api/admin/:uid/user", ctx -> {
             ArrayList<User> users = AccountRepo.getAllUsers();
+            ctx.json(Response.general(users));
+        });
+
+        app.get("/api/admin/:uid/user/stats", ctx -> {
+            ArrayList<Map> users = AccountRepo.getUserStats(ctx.queryParam("period"));
             ctx.json(Response.general(users));
         });
 
@@ -65,6 +71,11 @@ public class AdminEndpoints {
             ctx.json(Response.general(logs));
         });
 
+        app.get("/api/admin/:adminuid/app/:appUid/log/stats", ctx -> {
+            ArrayList<Map> logs = LogRepo.getAppLogStats(ctx.pathParam("appUid"), ctx.queryParam("period"));
+            ctx.json(Response.general(logs));
+        });
+
         app.get("/api/admin/:uid/node", ctx -> {
             ArrayList<Node> nodes = NodeRepo.getAll();
             ctx.json(Response.general(nodes));
@@ -72,17 +83,17 @@ public class AdminEndpoints {
 
         app.post("/api/admin/:adminUid/user/:userUid", ctx -> {
             User user = ctx.bodyAsClass(User.class);
-            AccountRepo.add(user);
+            ctx.json(AccountRepo.add(user));
         });
 
         app.put("/api/admin/:adminUid/user/:userUid", ctx -> {
             User user = ctx.bodyAsClass(User.class);
-            AccountRepo.update(user);
+            ctx.json(AccountRepo.update(user));
         });
 
         app.put("/api/admin/:adminUid/app/:appUid", ctx -> {
             App user = ctx.bodyAsClass(App.class);
-            AppRepo.update(user);
+            ctx.json(AppRepo.update(user));
         });
 
     }

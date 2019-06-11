@@ -18,6 +18,13 @@ public class Select {
                 "WHERE uid = '%s'", uid);
     }
 
+    public static String userStatsByDuration(String duration) {
+        return String.format(
+                "SELECT %s(created) as %s, count(*) as count FROM user " +
+                "GROUP BY %s(created)", duration, duration, duration
+        );
+    }
+
     public static String apps(String userUid) {
         return String.format(
                 "SELECT * FROM app a " +
@@ -68,6 +75,15 @@ public class Select {
         );
     }
 
+    public static String appLogsStatsByDuration(String appUid, String duration) {
+        return String.format(
+                "SELECT %s(datetime) as %s, count(*) as count FROM log l " +
+                "INNER JOIN node n ON n.uid = l.node " +
+                "WHERE n.app = '%s' " +
+                "GROUP BY %s(datetime)", duration, duration, appUid, duration
+        );
+    }
+
     public static String allLogs() {
         return "SELECT * FROM log";
     }
@@ -106,7 +122,15 @@ public class Select {
 
     public static String internalLogs() {
         return "SELECT * FROM log " +
-        "WHERE node is null";
+                "WHERE node is null";
+    }
+
+    public static String internalLogs(int limit) {
+        return String.format(
+                "SELECT * FROM log " +
+                "WHERE node is null " +
+                "LIMIT %s", limit
+        );
     }
 
     public static String internalLogsFromDate(Date date) {

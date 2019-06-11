@@ -15,12 +15,14 @@ import static db.Repository.*;
 
 public class AccountRepo {
 
-    public static void add(Admin admin) throws SQLException {
+    public static Admin add(Admin admin) throws SQLException {
         executeManipulation(Insert.admin(admin));
+        return admin;
     }
 
-    public static void add(User user) throws SQLException {
+    public static User add(User user) throws SQLException {
         executeManipulation(Insert.user(user));
+        return user;
     }
 
     public static User getUserByUid(String uid) throws Exception {
@@ -35,6 +37,10 @@ public class AccountRepo {
         if (results.size() == 0) throw new Exception("Admin " + uid + " not found");
         Map user = results.get(0);
         return deserializeAdmin(user);
+    }
+
+    public static ArrayList<Map> getUserStats(String period) throws SQLException {
+        return executeQuery(Select.userStatsByDuration(period));
     }
 
     public static ArrayList<User> getAllUsers() throws SQLException {

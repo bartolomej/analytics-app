@@ -18,7 +18,8 @@ public class Application {
         Repository.init();
 
         Javalin app = Javalin.create()
-                .enableCorsForOrigin("http://lvh.me:3000")
+                .enableCorsForOrigin("localhost")
+                .enableCorsForAllOrigins()
                 .enableCaseSensitiveUrls()
                 .start(7000);
 
