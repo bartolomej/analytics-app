@@ -5,10 +5,8 @@ import * as serviceWorker from './serviceWorker';
 import './styles/App.css';
 import 'typeface-roboto';
 import AdminApp from './screens/admin/App';
-
-/* TODO:
- * -> https://www.npmjs.com/package/material-table
- */
+import SignIn from './screens/SignIn';
+import Router from './screens/Router';
 
 const App = () => {
   return (

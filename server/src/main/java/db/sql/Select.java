@@ -84,6 +84,14 @@ public class Select {
         );
     }
 
+    public static String internalAppLogStats(String duration) {
+        return String.format(
+                "SELECT %s(datetime) as %s, count(*) as count FROM log " +
+                "WHERE node is null " +
+                "GROUP BY %s(datetime)", duration, duration, duration
+        );
+    }
+
     public static String allLogs() {
         return "SELECT * FROM log";
     }

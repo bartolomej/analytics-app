@@ -62,8 +62,17 @@ public class AdminEndpoints {
         });
 
         app.get("/api/admin/:uid/log", ctx -> {
-            ArrayList<Log> logs = LogRepo.getInternalLogs();
+            String limit = ctx.queryParam("limit");
+            ArrayList<Log> logs;
+            if (limit != null) logs = LogRepo.getInternalLogsWithLimit(limit);
+            else logs = LogRepo.getInternalLogs();
             ctx.json(Response.general(logs));
+        });
+
+        app.get("/api/admin/:uid/log/stats", ctx -> {
+            String timePeriod = ctx.queryParam("period");
+            ArrayList<Map> stats = LogRepo.getInternalLogStats(timePeriod);
+            ctx.json(Response.general(stats));
         });
 
         app.get("/api/admin/:adminuid/log/:type", ctx -> {

@@ -23,7 +23,7 @@ public class LogRepo {
         return deserializeResults(executeQuery(Select.internalLogs()));
     }
 
-    public static ArrayList<Log> getInternalLogs(int limit) throws SQLException {
+    public static ArrayList<Log> getInternalLogsWithLimit(String limit) throws SQLException {
         return deserializeResults(executeQuery(Select.internalLogs()));
     }
 
@@ -41,6 +41,10 @@ public class LogRepo {
 
     public static ArrayList<Map> getAppLogStats(String appUid, String timeDuration) throws Exception {
         return executeQuery(Select.appLogsStatsByDuration(appUid, timeDuration));
+    }
+
+    public static ArrayList<Map> getInternalLogStats(String timeDuration) throws Exception {
+        return executeQuery(Select.internalAppLogStats(timeDuration));
     }
 
     public static ArrayList<Log> getByNode(String nodeUid, Date from) throws Exception {
