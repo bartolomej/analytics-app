@@ -1,58 +1,72 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import clsx from 'clsx';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Chart from '../../components/Chart';
-import Apps from '../../components/Apps';
 import {useStyles} from "../../styles/dashboard";
+import { Graph } from 'react-d3-graph';
+import {getAllNodes} from "../../api/AdminApi";
 
+const data = {
+  nodes: [{ id: 'Harry' }, { id: 'Sally' }, { id: 'Alice' }],
+  links: [{ source: 'Harry', target: 'Sally' }, { source: 'Harry', target: 'Alice' }]
+};
 
-// Generate Order Data
-function createAppData(name, url, description, created) {
-  return {name, url, description, created};
+const myConfig = {
+  nodeHighlightBehavior: true,
+  node: {
+    color: 'lightblue',
+    size: 200,
+    highlightStrokeColor: 'blue'
+  },
+  link: {
+    highlightColor: 'lightblue'
+  }
+};
+
+function parseGraph(graph) {
+  let nodes = [];
+  let links = [];
+
+  graph.forEach(ele => {
+    nodes.push({id: ele.uid});
+    ele.edges.forEach(edge => {
+      links.push({source: ele.uid, target: edge})
+    })
+  });
+
+  return {nodes, links}
 }
-
-function createChartData(time, amount) {
-  return { time, amount };
-}
-
-const appData = [
-  createAppData('CryptoExchange', 'exchange.com', 'Best crypto exchange app ', '16 Mar, 2019'),
-  createAppData('SomeApp', 'someApp.com', 'Best random app ever ', '16 Mar, 2019'),
-];
-
-const chartData = [
-  createChartData('00:00', 0),
-  createChartData('03:00', 300),
-  createChartData('06:00', 600),
-  createChartData('09:00', 800),
-  createChartData('12:00', 1500),
-  createChartData('15:00', 2000),
-  createChartData('18:00', 2400),
-  createChartData('21:00', 2400),
-  createChartData('24:00', undefined),
-];
 
 export default () => {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+  const [nodes, setNodes] = useState({loading: true, error: null, data: data});
+
+  useEffect(() => {
+    const uid = 'ed715a73-4f35-4be2-b9ed-3b922850cbf6';
+    const fetchData = async () => {
+      const nodesRes = await getAllNodes(uid)
+        .catch(e => setNodes({loading: false, error: e, data: []}));
+      console.log('parsedGraph', parseGraph(nodesRes));
+      if (nodesRes !== undefined) setNodes({loading: false, error: null, data: parseGraph(nodesRes)});
+    };
+    fetchData();
+  }, []);
+
+  const onClickNode = function(nodeId) {
+    window.alert(`Clicked node ${nodeId}`);
+  };
+
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Grid container spacing={3}>
-        {/* Chart */}
-        <Grid item xs={12} >
-          <Paper className={fixedHeightPaper}>
-            <Chart data={chartData}/>
-          </Paper>
-        </Grid>
-        {/* Recent Logs */}
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            <Apps title={'Regestered apps'} data={appData}/>
-          </Paper>
-        </Grid>
+        <Graph
+          id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
+          data={nodes.data}
+          config={myConfig}
+          onClickNode={onClickNode}
+        />;
       </Grid>
     </Container>
   );

@@ -48,7 +48,7 @@ export default async function request(opts = {}) {
       const response = await res.json();
       console.log('response', response);
       if (response.status === 'error')
-        return reject(response.error);
+        return reject(new Error(response.type));
       return resolve(response.data);
     })
   })

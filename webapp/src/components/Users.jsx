@@ -41,14 +41,15 @@ export default ({title, data}) => {
               <TableCell>{row.username}</TableCell>
               <TableCell>{row.password}</TableCell>
               <TableCell>{row.role}</TableCell>
-              <TableCell>{row.created}</TableCell>
+              <TableCell>{new Date(row.created).toLocaleString()}</TableCell>
+              <TableCell><a href={`/admin/user/${row.uid}`}>EDIT</a></TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
         <Link color="primary" href="javascript:;">
-          See more activity
+          View more users
         </Link>
       </div>
     </React.Fragment>

@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default ({title, loading, error, data}) => {
+export default ({title, loading, error, data, seeMore = true}) => {
   const classes = useStyles();
 
   if (loading) return <Loading/>;
@@ -42,7 +42,7 @@ export default ({title, loading, error, data}) => {
           {data.map(row => (
             <TableRow key={row.id}>
               <TableCell>{row.type}</TableCell>
-              <TableCell>{row.datetime}</TableCell>
+              <TableCell>{new Date(row.datetime).toLocaleString()}</TableCell>
               <TableCell>{row.message}</TableCell>
               <TableCell>{row.extra}</TableCell>
               <TableCell>{row.node}</TableCell>
@@ -51,9 +51,11 @@ export default ({title, loading, error, data}) => {
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
+        {seeMore &&
         <Link color="primary" href="javascript:;">
           See more activity
         </Link>
+        }
       </div>
     </React.Fragment>
   );

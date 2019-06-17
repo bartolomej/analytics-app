@@ -10,12 +10,12 @@ import {getUsers, getUserRegistrationStats} from "../../api/AdminApi";
 
 
 export default () => {
-  const [users, setUsers] = useState({loading: false, error: null, data: []});
-  const [userStats, setUserStats] = useState({loading: false, error: null, data: []});
+  const [users, setUsers] = useState({loading: true, error: null, data: []});
+  const [userStats, setUserStats] = useState({loading: true, error: null, data: []});
 
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-/*
+
   useEffect(() => {
     const uid = 'ed715a73-4f35-4be2-b9ed-3b922850cbf6';
     const fetchData = async () => {
@@ -28,7 +28,7 @@ export default () => {
     };
     fetchData();
   }, []);
-*/
+
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Grid container spacing={3}>

@@ -37,7 +37,7 @@ export default ({title, data}) => {
               <TableCell>{row.name}</TableCell>
               <TableCell>{row.url}</TableCell>
               <TableCell>{row.description}</TableCell>
-              <TableCell>{row.created}</TableCell>
+              <TableCell>{new Date(row.created).toLocaleString()}</TableCell>
             </TableRow>
           ))}
         </TableBody>

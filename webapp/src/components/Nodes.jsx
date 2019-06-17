@@ -38,7 +38,7 @@ export default ({title, data}) => {
               <TableCell>{row.uid}</TableCell>
               <TableCell>{row.url}</TableCell>
               <TableCell>{row.app}</TableCell>
-              <TableCell>{row.created}</TableCell>
+              <TableCell>{new Date(row.created).toLocaleString()}</TableCell>
               <TableCell>{row.edges.length}</TableCell>
             </TableRow>
           ))}

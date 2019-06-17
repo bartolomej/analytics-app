@@ -29,8 +29,10 @@ import Users from './Users';
 import Apps from './Apps';
 import Analytics from './Analytics';
 import Logs from './Logs';
+import UserScreen from "./UserScreen";
 
-export default ({match}) => {
+export default ({match, location}) => {
+  console.log("LOCATION ", location);
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [currentTab, setCurrentTab] = React.useState("Dashboard");
@@ -132,11 +134,15 @@ export default ({match}) => {
           }} />
           <Route path={`${match.url}/analytics`} component={() => {
             setCurrentTab("Analytics");
-            return Apps();
+            return Analytics();
           }} />
           <Route path={`${match.url}/logs`} component={() => {
             setCurrentTab("Logs");
             return Logs();
+          }} />
+          <Route path={`${match.url}/user/:id`} component={(match) => {
+            setCurrentTab("User ");
+            return UserScreen(match);
           }} />
         </Container>
       </main>
