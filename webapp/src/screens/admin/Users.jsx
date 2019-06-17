@@ -10,8 +10,8 @@ import {getUsers, getUserRegistrationStats} from "../../api/AdminApi";
 
 
 export default () => {
-  const [users, setUsers] = useState({loading: true, error: null, data: []});
-  const [userStats, setUserStats] = useState({loading: true, error: null, data: []});
+  const [users, setUsers] = useState({loading: false, error: null, data: []});
+  const [userStats, setUserStats] = useState({loading: false, error: null, data: []});
 
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -33,7 +33,7 @@ export default () => {
     <Container maxWidth="lg" className={classes.container}>
       <Grid container spacing={3}>
         {/* Chart */}
-        <Grid item xs={12} >
+        <Grid item xs={12}>
           <Paper className={fixedHeightPaper}>
             <Chart
               data={userStats.data}

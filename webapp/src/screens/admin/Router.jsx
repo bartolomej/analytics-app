@@ -30,7 +30,7 @@ import Apps from './Apps';
 import Analytics from './Analytics';
 import Logs from './Logs';
 
-export default () => {
+export default ({match}) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [currentTab, setCurrentTab] = React.useState("Dashboard");
@@ -43,9 +43,9 @@ export default () => {
   };
 
   return (
+    <BrowserRouter>
     <div className={classes.root}>
       <CssBaseline />
-      <BrowserRouter>
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
@@ -82,31 +82,31 @@ export default () => {
         <Divider />
         <List>
           <div>
-            <ListItem button component={Link} to="/">
+            <ListItem button component={Link} to={`${match.url}/`}>
               <ListItemIcon>
                 <DashboardIcon />
               </ListItemIcon>
               <ListItemText primary="Dashboard" />
             </ListItem>
-            <ListItem button component={Link} to="/users">
+            <ListItem button component={Link} to={`${match.url}/users`}>
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
               <ListItemText primary="Users" />
             </ListItem>
-            <ListItem button component={Link} to="/apps">
+            <ListItem button component={Link} to={`${match.url}/apps`}>
               <ListItemIcon>
                 <AppIcon />
               </ListItemIcon>
               <ListItemText primary="Apps" />
             </ListItem>
-            <ListItem button component={Link} to="/analytics">
+            <ListItem button component={Link} to={`${match.url}/analytics`}>
               <ListItemIcon>
                 <BarChartIcon />
               </ListItemIcon>
               <ListItemText primary="Analytics" />
             </ListItem>
-            <ListItem button component={Link} to="/logs">
+            <ListItem button component={Link} to={`${match.url}/logs`}>
               <ListItemIcon>
                 <LogIcon />
               </ListItemIcon>
@@ -118,29 +118,29 @@ export default () => {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Route path="/" component={() => {
+          <Route exact path={`${match.url}/`} component={() => {
             setCurrentTab("Dashboard");
             return Dashboard();
           }}/>
-          <Route path="/users" component={() => {
+          <Route path={`${match.url}/users`} component={() => {
             setCurrentTab("Users");
             return Users();
           }}/>
-          <Route path="/apps" component={() => {
+          <Route path={`${match.url}/apps`} component={() => {
             setCurrentTab("Apps");
             return Apps();
           }} />
-          <Route path="/analytics" component={() => {
+          <Route path={`${match.url}/analytics`} component={() => {
             setCurrentTab("Analytics");
             return Apps();
           }} />
-          <Route path="/logs" component={() => {
+          <Route path={`${match.url}/logs`} component={() => {
             setCurrentTab("Logs");
             return Logs();
           }} />
         </Container>
       </main>
-      </BrowserRouter>
     </div>
+    </BrowserRouter>
   );
 }

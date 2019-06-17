@@ -4,13 +4,11 @@ import './styles/index.css';
 import * as serviceWorker from './serviceWorker';
 import './styles/App.css';
 import 'typeface-roboto';
-import AdminApp from './screens/admin/App';
-import SignIn from './screens/SignIn';
-import Router from './screens/Router';
+import AppRoot from './screens/App';
 
 const App = () => {
   return (
-    <AdminApp/>
+    <AppRoot/>
   )
 };
 
