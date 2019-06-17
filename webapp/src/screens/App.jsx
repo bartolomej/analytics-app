@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import AdminApp from "./admin/Router";
+import UserApp from './user/Router';
 import SignIn from './SignIn';
 
 export default () => {
@@ -13,7 +14,7 @@ export default () => {
 
         <Route path="/auth" component={SignIn}/>
         <Route path="/admin" component={AdminApp}/>
-        <Route path="/user" component={AdminApp}/>
+        <Route path="/user" component={UserApp}/>
       </BrowserRouter>
     </div>
   )
