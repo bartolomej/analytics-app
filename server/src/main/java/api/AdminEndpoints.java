@@ -21,6 +21,31 @@ public class AdminEndpoints {
 
     private void routesHandler() {
 
+        // STATISTICS ENDPOINTS //
+
+        app.get("/api/admin/:adminuid/app/:appUid/log/stats", ctx -> {
+            ArrayList<Map> logs = LogRepo.getAppLogStats(ctx.pathParam("appUid"), ctx.queryParam("period"));
+            ctx.json(Response.general(logs));
+        });
+
+        app.get("/api/admin/:uid/log/stats", ctx -> {
+            String timePeriod = ctx.queryParam("period");
+            ArrayList<Map> stats = LogRepo.getInternalLogStats(timePeriod);
+            ctx.json(Response.general(stats));
+        });
+
+        app.get("/api/admin/:uid/user/stats", ctx -> {
+            ArrayList<Map> users = AccountRepo.getUserStats(ctx.queryParam("period"));
+            ctx.json(Response.general(users));
+        });
+
+        app.get("/api/admin/:uid/app/stats", ctx -> {
+            ArrayList<Map> appStats = AppRepo.getAppStats(ctx.queryParam("period"));
+            ctx.json(Response.general(appStats));
+        });
+
+        // GET ENDPOINTS //
+
         app.get("/api/admin", ctx -> {
             ctx.json(Response.general(null));
         });
@@ -41,13 +66,23 @@ public class AdminEndpoints {
             ctx.json(Response.general(users));
         });
 
-        app.get("/api/admin/:uid/user/stats", ctx -> {
-            ArrayList<Map> users = AccountRepo.getUserStats(ctx.queryParam("period"));
-            ctx.json(Response.general(users));
+        app.get("/api/admin/:uid/user/:userUid/log", ctx -> {
+            ArrayList<Log> logs = LogRepo.getByUser(ctx.pathParam("userUid"));
+            ctx.json(Response.general(logs));
+        });
+
+        app.get("/api/admin/:uid/user/:userUid/app", ctx -> {
+            ArrayList<App> logs = AppRepo.getByUser(ctx.pathParam("userUid"));
+            ctx.json(Response.general(logs));
         });
 
         app.get("/api/admin/:adminuid/user/:useruid", ctx -> {
             User user = AccountRepo.getUserByUid(ctx.pathParam("useruid"));
+            ctx.json(Response.general(user));
+        });
+
+        app.get("/api/admin/:adminuid/user/:useruid/coworkers", ctx -> {
+            ArrayList<User> user = AccountRepo.getAllCoworkers(ctx.pathParam("useruid"));
             ctx.json(Response.general(user));
         });
 
@@ -69,19 +104,8 @@ public class AdminEndpoints {
             ctx.json(Response.general(logs));
         });
 
-        app.get("/api/admin/:uid/log/stats", ctx -> {
-            String timePeriod = ctx.queryParam("period");
-            ArrayList<Map> stats = LogRepo.getInternalLogStats(timePeriod);
-            ctx.json(Response.general(stats));
-        });
-
         app.get("/api/admin/:adminuid/log/:type", ctx -> {
             ArrayList<Log> logs = LogRepo.getInternalLogs(ctx.pathParam("type"));
-            ctx.json(Response.general(logs));
-        });
-
-        app.get("/api/admin/:adminuid/app/:appUid/log/stats", ctx -> {
-            ArrayList<Map> logs = LogRepo.getAppLogStats(ctx.pathParam("appUid"), ctx.queryParam("period"));
             ctx.json(Response.general(logs));
         });
 
@@ -89,6 +113,13 @@ public class AdminEndpoints {
             ArrayList<Node> nodes = NodeRepo.getAll();
             ctx.json(Response.general(nodes));
         });
+
+        app.get("/api/admin/:uid/node/:nodeUid/log", ctx -> {
+            ArrayList<Log> nodes = LogRepo.getByNode(ctx.pathParam("nodeUid"));
+            ctx.json(Response.general(nodes));
+        });
+
+        // POST & PUT ENDPOINTS //
 
         app.post("/api/admin/:adminUid/user/:userUid", ctx -> {
             User user = ctx.bodyAsClass(User.class);

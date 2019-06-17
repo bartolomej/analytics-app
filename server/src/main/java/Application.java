@@ -1,4 +1,5 @@
 import api.AdminEndpoints;
+import api.AuthEndpoints;
 import api.ClientEndpoints;
 import api.WebEndpoints;
 import db.Repository;
@@ -12,6 +13,7 @@ public class Application {
     static WebEndpoints webEndpoints;
     static AdminEndpoints adminEndpoints;
     static ClientEndpoints clientEndpoints;
+    static AuthEndpoints authEndpoints;
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
@@ -29,6 +31,7 @@ public class Application {
         webEndpoints = new WebEndpoints(app);
         adminEndpoints = new AdminEndpoints(app);
         clientEndpoints = new ClientEndpoints(app);
+        authEndpoints = new AuthEndpoints(app);
 
         app.error(404, ctx -> {
             ctx.json(Response.notFound("Path not found"));

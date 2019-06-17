@@ -1,6 +1,11 @@
 package api;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTCreator;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
 import io.javalin.Javalin;
+import models.User;
 
 public class AuthEndpoints {
 
@@ -15,8 +20,8 @@ public class AuthEndpoints {
         this.routesHandler();
     }
 
-    private void initializeAuth() {
-        // INIT
+    private void init() {
+
     }
 
     private void routesHandler() {

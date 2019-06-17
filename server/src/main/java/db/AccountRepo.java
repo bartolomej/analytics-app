@@ -43,6 +43,15 @@ public class AccountRepo {
         return executeQuery(Select.userStatsByDuration(period));
     }
 
+    public static ArrayList<User> getAllCoworkers(String userUid) throws SQLException {
+        ArrayList<Map> results = executeQuery(Select.allCoworkers(userUid));
+        ArrayList<User> users = new ArrayList<>();
+        for (Map entry : results) {
+            users.add(deserializeUser(entry));
+        }
+        return users;
+    }
+
     public static ArrayList<User> getAllUsers() throws SQLException {
         ArrayList<Map> results = executeQuery(Select.allUsers());
         ArrayList<User> users = new ArrayList<>();

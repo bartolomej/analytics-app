@@ -91,52 +91,106 @@ INSERT INTO log (type, datetime, message, extra, node)
 VALUES ('APP', '2019-01-01 10:11:01', 'Request from 12.124.412', 'GET /admin/login', '402665f2-489f-4434-b3e4-1a163702a944');
 
 INSERT INTO log (type, datetime, message, extra, node)
-VALUES ('ERROR', '2019-01-01 10:11:42', 'Admin with username superSuperAdmin doesnt exist', 'POST /admin/login', '402665f2-489f-4434-b3e4-1a163702a944');
+VALUES ('ERROR', '2019-01-01 11:11:42', 'Admin with username superSuperAdmin doesnt exist', 'POST /admin/login', '402665f2-489f-4434-b3e4-1a163702a944');
 
 INSERT INTO log (type, datetime, message, extra, node)
-VALUES ('APP', '2019-01-01 10:12:32', 'Request from 12.124.41.32', 'GET /admin/login', '402665f2-489f-4434-b3e4-1a163702a944');
+VALUES ('APP', '2019-01-01 12:12:32', 'Request from 12.124.41.32', 'GET /admin/login', '402665f2-489f-4434-b3e4-1a163702a944');
 
 INSERT INTO log (type, datetime, message, extra, node)
-VALUES ('APP', '2019-01-01 10:10:01', 'Request from 12.124.21', 'GET /admin/login', '402665f2-489f-4434-b3e4-1a163702a944');
+VALUES ('APP', '2019-01-01 13:10:01', 'Request from 12.124.21', 'GET /admin/login', '402665f2-489f-4434-b3e4-1a163702a944');
 
 INSERT INTO log (type, datetime, message, extra, node)
-VALUES ('ERROR', '2019-01-01 10:10:42', 'Password incorrect', 'POST /admin/login', '402665f2-489f-4434-b3e4-1a163702a944');
+VALUES ('ERROR', '2019-01-01 14:10:42', 'Password incorrect', 'POST /admin/login', '402665f2-489f-4434-b3e4-1a163702a944');
 
 INSERT INTO log (type, datetime, message, extra, node)
-VALUES ('APP', '2019-01-01 10:10:32', 'Request from 192.124.41.32', 'GET /admin/login', '402665f2-489f-4434-b3e4-1a163702a944');
+VALUES ('APP', '2019-01-01 15:10:32', 'Request from 192.124.41.32', 'GET /admin/login', '402665f2-489f-4434-b3e4-1a163702a944');
 
 INSERT INTO log (type, datetime, message, extra, node)
 VALUES ('APP', '2019-01-01 10:11:01', 'Request from 12.124.412', 'GET /login', 'f4a51be0-2504-48ea-993d-554d8e9077b2');
 
 INSERT INTO log (type, datetime, message, extra, node)
-VALUES ('ERROR', '2019-01-01 10:11:42', 'User with username bartolomej doesnt exist', 'POST /login', 'f4a51be0-2504-48ea-993d-554d8e9077b2');
+VALUES ('ERROR', '2019-01-02 10:11:42', 'User with username bartolomej doesnt exist', 'POST /login', 'f4a51be0-2504-48ea-993d-554d8e9077b2');
 
 INSERT INTO log (type, datetime, message, extra, node)
-VALUES ('APP', '2019-01-01 10:12:32', 'Request from 12.124.41.32', 'POST /login', 'f4a51be0-2504-48ea-993d-554d8e9077b2');
+VALUES ('APP', '2019-01-03 10:12:32', 'Request from 12.124.41.32', 'POST /login', 'f4a51be0-2504-48ea-993d-554d8e9077b2');
 
 INSERT INTO log (type, datetime, message, extra, node)
-VALUES ('APP', '2019-01-01 10:10:01', 'Request from 12.124.21', 'GET /dashboard', 'f4a51be0-2504-48ea-993d-554d8e9077b2');
+VALUES ('APP', '2019-01-04 10:10:01', 'Request from 12.124.21', 'GET /dashboard', 'f4a51be0-2504-48ea-993d-554d8e9077b2');
 
 INSERT INTO log (type, datetime, message, extra, node)
-VALUES ('ERROR', '2019-01-01 10:10:42', 'Order cannot be fullfilled', 'POST /order', 'f4a51be0-2504-48ea-993d-554d8e9077b2');
+VALUES ('ERROR', '2019-01-05 10:10:42', 'Order cannot be fullfilled', 'POST /order', 'f4a51be0-2504-48ea-993d-554d8e9077b2');
 
 INSERT INTO log (type, datetime, message, extra, node)
-VALUES ('APP', '2019-01-01 10:10:32', 'Request from 192.124.41.32', 'GET /dashboard', 'f4a51be0-2504-48ea-993d-554d8e9077b2');
+VALUES ('APP', '2019-01-06 10:10:32', 'Request from 192.124.41.32', 'GET /dashboard', 'f4a51be0-2504-48ea-993d-554d8e9077b2');
 
 INSERT INTO log (type, datetime, message, extra, node)
 VALUES ('APP', '2019-01-01 10:10:01', 'Request from 12.124.21', 'GET /profile', '8b5bc1ea-a109-41a1-ad1a-72c2f558501f');
 
 INSERT INTO log (type, datetime, message, extra, node)
-VALUES ('ERROR', '2019-01-01 10:10:42', 'Cannot update password', 'POST /profile', '8b5bc1ea-a109-41a1-ad1a-72c2f558501f');
+VALUES ('ERROR', '2019-01-01 10:11:42', 'Cannot update password', 'POST /profile', '8b5bc1ea-a109-41a1-ad1a-72c2f558501f');
 
 INSERT INTO log (type, datetime, message, extra, node)
-VALUES ('APP', '2019-01-01 10:10:32', 'Request from 192.124.41.32', 'GET /profile', '8b5bc1ea-a109-41a1-ad1a-72c2f558501f');
+VALUES ('APP', '2019-01-01 10:12:32', 'Request from 192.124.41.32', 'GET /profile', '8b5bc1ea-a109-41a1-ad1a-72c2f558501f');
 
 INSERT INTO log (type, datetime, message, extra, node)
-VALUES ('APP', '2019-01-01 10:10:32', 'Request from 192.124.41.32', 'GET /test', '9063bc21-848a-4ee5-a657-4e9045659901');
+VALUES ('APP', '2019-01-01 10:13:32', 'Request from 192.124.41.32', 'GET /test', '9063bc21-848a-4ee5-a657-4e9045659901');
 
 INSERT INTO log (type, datetime, message, extra, node)
-VALUES ('APP', '2019-01-01 10:10:32', 'Request from 192.124.41.32', 'GET /test', '9063bc21-848a-4ee5-a657-4e9045659901');
+VALUES ('APP', '2019-01-01 10:14:32', 'Request from 192.124.41.32', 'GET /test', '9063bc21-848a-4ee5-a657-4e9045659901');
+
+
+-- INTERNAL LOGS --
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('APP', '2019-01-01 10:11:01', 'Request from 12.124.412', 'GET /admin/login', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('ERROR', '2019-01-01 11:11:42', 'Admin with username superSuperAdmin doesnt exist', 'POST /admin/login', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('APP', '2019-01-01 12:12:32', 'Request from 12.124.41.32', 'GET /admin/login', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('APP', '2019-01-01 13:10:01', 'Request from 12.124.21', 'GET /admin/login', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('ERROR', '2019-01-01 14:10:42', 'Password incorrect', 'POST /admin/login', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('APP', '2019-01-01 15:10:32', 'Request from 192.124.41.32', 'GET /admin/login', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('APP', '2019-01-01 10:11:01', 'Request from 12.124.412', 'GET /login', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('ERROR', '2019-01-02 10:11:42', 'User with username bartolomej doesnt exist', 'POST /login', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('APP', '2019-01-03 10:12:32', 'Request from 12.124.41.32', 'POST /login', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('APP', '2019-01-04 10:10:01', 'Request from 12.124.21', 'GET /dashboard', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('ERROR', '2019-01-05 10:10:42', 'Order cannot be fullfilled', 'POST /order', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('APP', '2019-01-06 10:10:32', 'Request from 192.124.41.32', 'GET /dashboard', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('APP', '2019-01-01 10:10:01', 'Request from 12.124.21', 'GET /profile', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('ERROR', '2019-01-01 10:11:42', 'Cannot update password', 'POST /profile', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('APP', '2019-01-01 10:12:32', 'Request from 192.124.41.32', 'GET /profile', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('APP', '2019-01-01 10:13:32', 'Request from 192.124.41.32', 'GET /test', null);
+
+INSERT INTO log (type, datetime, message, extra, node)
+VALUES ('APP', '2019-01-01 10:14:32', 'Request from 192.124.41.32', 'GET /test', null);
 
 
 -- ADMIN INSERTS --

@@ -14,6 +14,7 @@ public class Node {
     public Node(String uid, String url, String app, Date created, ArrayList<String> edges) {
         this.uid = uid;
         this.url = url;
+        this.app = app;
         this.created = created;
         this.edges = new ArrayList<>();
     }

@@ -34,13 +34,16 @@ public class AppRepo {
         return deserializeResults(executeQuery(Select.app(name))).get(0);
     }
 
+    public static ArrayList<Map> getAppStats(String duration) throws SQLException {
+        return executeQuery(Select.appStats(duration));
+    }
+
     public static ArrayList<App> getAll() throws Exception {
         return deserializeResults(executeQuery(Select.allApps()));
     }
 
     private static ArrayList<App> deserializeResults(ArrayList<Map> results) throws Exception {
         ArrayList<App> apps = new ArrayList<>();
-        if (results.size() == 0) throw new Exception("App not found");
         for (Map entry : results) {
             Date date = ParseUtil.toJavaDate((String)entry.get("created"));
             apps.add(new App(

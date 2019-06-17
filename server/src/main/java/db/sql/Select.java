@@ -18,13 +18,6 @@ public class Select {
                 "WHERE uid = '%s'", uid);
     }
 
-    public static String userStatsByDuration(String duration) {
-        return String.format(
-                "SELECT %s(created) as %s, count(*) as amount FROM user " +
-                "GROUP BY %s(created)", duration, duration, duration
-        );
-    }
-
     public static String apps(String userUid) {
         return String.format(
                 "SELECT * FROM app a " +
@@ -81,14 +74,6 @@ public class Select {
                 "INNER JOIN node n ON n.uid = l.node " +
                 "WHERE n.app = '%s' " +
                 "GROUP BY %s(datetime)", duration, appUid, duration
-        );
-    }
-
-    public static String internalAppLogStats(String duration) {
-        return String.format(
-                "SELECT %s(datetime) as time, count(*) as amount FROM log " +
-                "WHERE node is null " +
-                "GROUP BY %s(datetime)", duration, duration
         );
     }
 
@@ -159,12 +144,55 @@ public class Select {
         );
     }
 
+    public static String allCoworkers(String userUid) {
+        return String.format(
+                "SELECT * FROM user u " +
+                "INNER JOIN ownership o " +
+                "ON o.user = u.uid " +
+                "INNER JOIN app a " +
+                "ON a.name = o.app " +
+                "WHERE o.app IN ( " +
+                        "SELECT name FROM app a " +
+                        "INNER JOIN ownership o " +
+                        "ON o.app = a.name " +
+                        "INNER JOIN user u " +
+                        "ON o.user = u.uid " +
+                        "WHERE u.uid = '%s' " +
+                ")", userUid
+        );
+    }
+
     public static String allUsers() {
         return "SELECT * FROM user";
     }
 
     public static String allAdmins() {
         return "SELECT * FROM admin";
+    }
+
+
+    // STATISTICS QUERIES //
+
+    public static String userStatsByDuration(String duration) {
+        return String.format(
+                "SELECT %s(created) as %s, count(*) as amount FROM user " +
+                "GROUP BY %s(created)", duration, duration, duration
+        );
+    }
+
+    public static String internalAppLogStats(String duration) {
+        return String.format(
+                "SELECT %s(datetime) as time, count(*) as amount FROM log " +
+                "WHERE node is null " +
+                "GROUP BY %s(datetime)", duration, duration
+        );
+    }
+
+    public static String appStats(String duration) {
+        return String.format(
+                "SELECT %s(created) as %s, count(*) as amount FROM app " +
+                "GROUP BY %s(created)", duration, duration, duration
+        );
     }
 
 }

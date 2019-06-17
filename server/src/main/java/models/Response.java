@@ -1,7 +1,5 @@
 package models;
 
-import java.io.ObjectOutputStream;
-
 public class Response {
 
     public String status;
