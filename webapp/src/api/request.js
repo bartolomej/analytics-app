@@ -30,13 +30,13 @@ export default async function request(opts = {}) {
   console.log('body', opts.data);
   console.groupEnd();
 
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     timeout = setTimeout(() => {
       didTimeOut = true;
-      return resolve(
+      return reject(
         new Error(
-          GLOBAL_CONFIG.network_error_message)
-      )
+          GLOBAL_CONFIG.network_error_message
+        ))
     }, GLOBAL_CONFIG.timeout);
     fetch(url, {
       mode: 'cors',
@@ -47,11 +47,9 @@ export default async function request(opts = {}) {
       clearTimeout(timeout);
       const response = await res.json();
       console.log('response', response);
+      if (response.status === 'error')
+        return reject(response.error);
       return resolve(response.data);
-    }).catch(error => {
-      error = new Error(error.message);
-      console.log('req error', error);
-      return resolve(error);
     })
   })
 

@@ -8,6 +8,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 import Title from './Title';
 
 
@@ -17,8 +19,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default ({title, data}) => {
+export default ({title, loading, error, data}) => {
   const classes = useStyles();
+
+  if (loading) return <Loading/>;
+  if (error) return <Error error={error}/>;
+
   return (
     <React.Fragment>
       <Title>{title}</Title>

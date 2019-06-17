@@ -6,37 +6,25 @@ import Paper from '@material-ui/core/Paper';
 import Chart from '../../components/Chart';
 import Logs from '../../components/Logs';
 import {useStyles} from "../../styles/dashboard";
-import {getRecentLogs, getInternalStats} from '../../api/AdminApi';
+import {getRecentLogs, getInternalLogStats} from '../../api/AdminApi';
 
-function createChartData(time, amount) {
-  return { time, amount };
-}
-
-const chartData = [
-  createChartData('00:00', 0),
-  createChartData('03:00', 300),
-  createChartData('06:00', 600),
-  createChartData('09:00', 800),
-  createChartData('12:00', 1500),
-  createChartData('15:00', 2000),
-  createChartData('18:00', 2400),
-  createChartData('21:00', 2400),
-  createChartData('24:00', undefined),
-];
 
 export default () => {
-  const [logs, setLogs] = useState([{}]);
-  const [stats, setStats] = useState([{time: 100, amount: 2}]);
+  const [logs, setLogs] = useState({loading: true, error: null, data: []});
+  const [stats, setStats] = useState({loading: true, error: null, data: []});
 
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   useEffect(() => {
+    const uid = 'ed715a73-4f35-4be2-b9ed-3b922850cbf6';
     const fetchData = async () => {
-      const logs = await getRecentLogs('ed715a73-4f35-4be2-b9ed-3b922850cbf6', 10);
-      const stats = await getInternalStats('ed715a73-4f35-4be2-b9ed-3b922850cbf6', 'minute');
-      setStats(stats);
-      setLogs(logs);
+      const logs = await getRecentLogs(uid, 10)
+        .catch(e => setLogs({loading: false, error: e, data: []}));
+      const stats = await getInternalLogStats(uid, 'minute')
+        .catch(e => setStats({loading: false, error: e, data: []}));
+      if (logs !== undefined) setLogs({loading: false, error: null, data: logs});
+      if (stats !== undefined) setStats({loading: false, error: null, data: stats});
     };
     fetchData();
   }, []);
@@ -47,13 +35,22 @@ export default () => {
         {/* Chart */}
         <Grid item xs={12} >
           <Paper className={fixedHeightPaper}>
-            <Chart data={chartData} title="Log stats" yText="count"/>
+            <Chart
+              data={stats.data}
+              title="Internal Log statistics"
+              yText="count"
+              loading={stats.loading}
+              error={stats.error}/>
           </Paper>
         </Grid>
         {/* Recent Logs */}
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Logs title={'Recent activity'} data={logs}/>
+            <Logs
+              title={'Recent activity'}
+              loading={logs.loading}
+              error={logs.error}
+              data={logs.data}/>
           </Paper>
         </Grid>
       </Grid>

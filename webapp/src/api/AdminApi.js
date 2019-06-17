@@ -57,10 +57,20 @@ export const getUser = async (adminUid, userUid, token = 'aaa') => {
 
 // STATISTICS REQUESTS
 
-export const getInternalStats = async (adminUid, period, token = 'aaa') => {
+export const getInternalLogStats = async (adminUid, period, token = 'aaa') => {
   return await request({
     url: `/api/admin/${adminUid}/log/stats?period=${period}`,
     method: 'GET',
     token,
   });
+};
+
+export const getUserRegistrationStats = async (adminUid, period, token = 'aaa') => {
+  // TODO: call api
+};
+
+
+const handleError = error => {
+  console.log('Handling error ' + error);
+
 };

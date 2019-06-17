@@ -20,7 +20,7 @@ public class Select {
 
     public static String userStatsByDuration(String duration) {
         return String.format(
-                "SELECT %s(created) as %s, count(*) as count FROM user " +
+                "SELECT %s(created) as %s, count(*) as amount FROM user " +
                 "GROUP BY %s(created)", duration, duration, duration
         );
     }
@@ -77,18 +77,18 @@ public class Select {
 
     public static String appLogsStatsByDuration(String appUid, String duration) {
         return String.format(
-                "SELECT %s(datetime) as %s, count(*) as count FROM log l " +
+                "SELECT %s(datetime) as time, count(*) as amount FROM log l " +
                 "INNER JOIN node n ON n.uid = l.node " +
                 "WHERE n.app = '%s' " +
-                "GROUP BY %s(datetime)", duration, duration, appUid, duration
+                "GROUP BY %s(datetime)", duration, appUid, duration
         );
     }
 
     public static String internalAppLogStats(String duration) {
         return String.format(
-                "SELECT %s(datetime) as %s, count(*) as count FROM log " +
+                "SELECT %s(datetime) as time, count(*) as amount FROM log " +
                 "WHERE node is null " +
-                "GROUP BY %s(datetime)", duration, duration, duration
+                "GROUP BY %s(datetime)", duration, duration
         );
     }
 
