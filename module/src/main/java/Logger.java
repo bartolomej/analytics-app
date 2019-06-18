@@ -6,8 +6,9 @@ public class Logger {
 
     static String nodeUid;
 
-    public static void init(String node) {
+    public static void init(String node, String serverUrl) {
         nodeUid = node;
+        Api.init(serverUrl);
     }
 
     public static void log(String type, String message, String extra) {

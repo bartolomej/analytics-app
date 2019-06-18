@@ -33,9 +33,10 @@ public class LoggerTest {
 
     @Test
     public void logWithLogger() {
+        String url = "http://localhost:7000";
         String nodeUid = "402665f2-489f-4434-b3e4-1a163702a944";
 
-        Logger.init(nodeUid);
+        Logger.init(nodeUid, url);
 
         Logger.log("APP", "Testing logger", "");
     }
