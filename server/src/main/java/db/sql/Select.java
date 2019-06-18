@@ -188,6 +188,21 @@ public class Select {
         );
     }
 
+    public static String appLogsByUser(String userUid, String period) {
+        return String.format(
+                "SELECT %s(datetime) as time, count(*) as amount " +
+                "FROM log " +
+                "INNER JOIN node " +
+                "ON node.uid = log.node " +
+                "INNER JOIN app " +
+                "ON app.name = node.app " +
+                "INNER JOIN ownership o " +
+                "ON o.app = app.name " +
+                "WHERE o.user = '%s' " +
+                "GROUP BY %s(datetime)",
+                period, userUid, period
+        );
+    }
     public static String appStats(String duration) {
         return String.format(
                 "SELECT %s(created) as %s, count(*) as amount FROM app " +

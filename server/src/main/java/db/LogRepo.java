@@ -47,6 +47,10 @@ public class LogRepo {
         return executeQuery(Select.internalAppLogStats(timeDuration));
     }
 
+    public static ArrayList<Map> getLogStats(String userUid, String timeDuration) throws Exception {
+        return executeQuery(Select.appLogsByUser(userUid, timeDuration));
+    }
+
     public static ArrayList<Log> getByNode(String nodeUid, Date from) throws Exception {
         return deserializeResults(executeQuery(Select.nodeLogsFromDate(nodeUid, from)));
     }

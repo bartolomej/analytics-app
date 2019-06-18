@@ -41,13 +41,19 @@ export default ({match}) => {
     <Container maxWidth="lg" className={classes.container}>
       <Grid container spacing={3}>
         {/* User profile */}
-        <User
-          uid={user.data.uid}
-          username={user.data.username}
-          password={user.data.password}
-          email={user.data.email}
-          role={user.data.role}
-        />
+        <Grid
+          container
+          direction="column"
+          alignItems="center"
+          justify="center">
+          {/* User profile */}
+          <User
+            uid={user.data.uid}
+            username={user.data.username}
+            password={user.data.password}
+            email={user.data.email}
+            role={user.data.role}/>
+        </Grid>
         {/* Recent Logs */}
         <Grid item xs={12}>
           <Paper className={classes.paper}>

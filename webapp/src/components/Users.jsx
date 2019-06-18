@@ -1,7 +1,6 @@
-/* eslint-disable no-script-url */
-
 import React from 'react';
 import Link from '@material-ui/core/Link';
+import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -17,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default ({title, data}) => {
+export default ({title, data, edit = true}) => {
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -42,7 +41,7 @@ export default ({title, data}) => {
               <TableCell>{row.password}</TableCell>
               <TableCell>{row.role}</TableCell>
               <TableCell>{new Date(row.created).toLocaleString()}</TableCell>
-              <TableCell><a href={`/admin/user/${row.uid}`}>EDIT</a></TableCell>
+              {edit && <TableCell><a href={`/admin/user/${row.uid}`}><EditIcon/></a></TableCell>}
             </TableRow>
           ))}
         </TableBody>

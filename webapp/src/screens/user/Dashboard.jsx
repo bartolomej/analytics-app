@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Chart from '../../components/Chart';
 import Logs from '../../components/Logs';
 import {useStyles} from "../../styles/dashboard";
-import {getRecentLogs, getInternalLogStats} from '../../api/AdminApi';
+import {getLogStats, getAllLogs} from '../../api/UserApi';
 
 
 export default () => {
@@ -17,11 +17,11 @@ export default () => {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   useEffect(() => {
-    const uid = 'ed715a73-4f35-4be2-b9ed-3b922850cbf6';
+    const uid = '73383590-4ea4-43aa-9d19-2193a6ca2b53';
     const fetchData = async () => {
-      const logs = await getRecentLogs(uid, 10)
+      const logs = await getAllLogs(uid, 10)
         .catch(e => setLogs({loading: false, error: e, data: []}));
-      const stats = await getInternalLogStats(uid, 'minute')
+      const stats = await getLogStats(uid, 'minute')
         .catch(e => setStats({loading: false, error: e, data: []}));
       if (logs !== undefined) setLogs({loading: false, error: null, data: logs});
       if (stats !== undefined) setStats({loading: false, error: null, data: stats});

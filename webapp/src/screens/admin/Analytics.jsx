@@ -66,7 +66,7 @@ export default () => {
           data={nodes.data}
           config={myConfig}
           onClickNode={onClickNode}
-        />;
+        />
       </Grid>
     </Container>
   );

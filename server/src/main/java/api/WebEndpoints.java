@@ -9,6 +9,7 @@ import models.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 public class WebEndpoints {
 
@@ -36,8 +37,26 @@ public class WebEndpoints {
             ctx.json(Response.general(logs));
         });
 
+        app.get("/api/user/:useruid/log", ctx -> {
+            ArrayList<Log> logs = LogRepo.getByUser(ctx.pathParam("useruid"));
+            ctx.json(Response.general(logs));
+        });
+
+        app.get("/api/user/:useruid/coworkers", ctx -> {
+            ArrayList<User> logs = AccountRepo.getAllCoworkers(ctx.pathParam("useruid"));
+            ctx.json(Response.general(logs));
+        });
+
         app.get("/api/user/:useruid/app/:appname/node", ctx -> {
             ArrayList<Node> nodes = NodeRepo.getByApp(ctx.pathParam("appname"));
+            ctx.json(Response.general(nodes));
+        });
+
+
+        // STATISTICS ENDPOINTS //
+
+        app.get("/api/user/:useruid/log/stats", ctx -> {
+            ArrayList<Map> nodes = LogRepo.getLogStats(ctx.pathParam("useruid"), ctx.queryParam("period"));
             ctx.json(Response.general(nodes));
         });
 

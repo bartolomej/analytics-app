@@ -7,7 +7,10 @@ import Button from "@material-ui/core/es/Button/Button";
 
 const useStyles = makeStyles(theme => ({
   container: {
+    margin: '10',
     display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     flexWrap: 'wrap',
   },
   textField: {
@@ -39,7 +42,6 @@ export default ({uid, username, password, email, role, created}) => {
         value={uid}
         onChange={handleChange('name')}
         margin="normal"/>
-      <br/>
       <TextField
         id="standard-name"
         label="Username"
@@ -47,7 +49,6 @@ export default ({uid, username, password, email, role, created}) => {
         value={username}
         onChange={handleChange('name')}
         margin="normal"/>
-      <br/>
       <TextField
         id="standard-name"
         label="Password"
@@ -55,7 +56,6 @@ export default ({uid, username, password, email, role, created}) => {
         value={password}
         onChange={handleChange('name')}
         margin="normal"/>
-      <br/>
       <TextField
         id="standard-name"
         label="Email"
@@ -63,7 +63,6 @@ export default ({uid, username, password, email, role, created}) => {
         value={email}
         onChange={handleChange('name')}
         margin="normal"/>
-      <br/>
       <TextField
         id="standard-name"
         label="Role"
@@ -71,6 +70,15 @@ export default ({uid, username, password, email, role, created}) => {
         value={role}
         onChange={handleChange('name')}
         margin="normal"/>
+      {/*<Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        color="primary"
+        className={classes.submit}
+        onClick={() => console.log("clicked")}>
+        Submit
+      </Button>*/}
     </form>
   );
 }

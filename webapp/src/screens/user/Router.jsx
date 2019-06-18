@@ -100,12 +100,6 @@ export default ({match}) => {
               </ListItemIcon>
               <ListItemText primary="Apps" />
             </ListItem>
-            <ListItem button component={Link} to={`${match.url}/analytics`}>
-              <ListItemIcon>
-                <BarChartIcon />
-              </ListItemIcon>
-              <ListItemText primary="Analytics" />
-            </ListItem>
             <ListItem button component={Link} to={`${match.url}/logs`}>
               <ListItemIcon>
                 <LogIcon />
@@ -128,10 +122,6 @@ export default ({match}) => {
           }}/>
           <Route path={`${match.url}/apps`} component={() => {
             setCurrentTab("Apps");
-            return Apps();
-          }} />
-          <Route path={`${match.url}/analytics`} component={() => {
-            setCurrentTab("Analytics");
             return Apps();
           }} />
           <Route path={`${match.url}/logs`} component={() => {

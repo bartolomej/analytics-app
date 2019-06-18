@@ -1,9 +1,8 @@
-/* eslint-disable no-script-url */
-
 import React from 'react';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
+import ArrowIcon from '@material-ui/icons/ArrowRight';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
@@ -17,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default ({title, data}) => {
+export default ({title, data, enableGoTo = false}) => {
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -38,6 +37,7 @@ export default ({title, data}) => {
               <TableCell>{row.url}</TableCell>
               <TableCell>{row.description}</TableCell>
               <TableCell>{new Date(row.created).toLocaleString()}</TableCell>
+              {enableGoTo && <TableCell><a href={`/admin/user/${row.uid}`}><ArrowIcon/></a></TableCell>}
             </TableRow>
           ))}
         </TableBody>
